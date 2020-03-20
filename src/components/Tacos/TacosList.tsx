@@ -6,6 +6,7 @@ import { List, ListItem, ListItemText, makeStyles, Theme, createStyles, Card } f
 
 interface TacosListProps {
   tacos: Taco[];
+  selectTaco: Function;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const TacosList = ({ tacos }: TacosListProps) => {
+export const TacosList = ({ tacos, selectTaco }: TacosListProps) => {
   const classes = useStyles();
 
   return (
@@ -25,7 +26,7 @@ export const TacosList = ({ tacos }: TacosListProps) => {
       <List>
         {
           tacos.map((taco: Taco, i: number) => (
-            <ListItem key={i} button>
+            <ListItem key={i} button onClick={() => selectTaco(taco)}>
               <ListItemText primary={taco.id} secondary={taco.name} />
             </ListItem>
           ))
@@ -36,5 +37,6 @@ export const TacosList = ({ tacos }: TacosListProps) => {
 }
 
 TacosList.propTypes = {
-  tacos: PropTypes.array.isRequired
+  tacos: PropTypes.array.isRequired,
+  selectTaco: PropTypes.func.isRequired
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Theme,
@@ -10,6 +11,13 @@ import {
   CardContent,
   TextField
 } from '@material-ui/core';
+import { useForm, Controller } from 'react-hook-form';
+
+import { Taco } from './Taco';
+
+interface TacosDetailsProps {
+  taco?: Taco;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,20 +32,40 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const TacosDetails = () => {
+export const TacosDetails = ({ taco }: TacosDetailsProps) => {
   const classes = useStyles();
+  const { handleSubmit, reset, control, setValue } = useForm();
+
+  if (taco?.id) {
+    setValue('name', taco?.name);
+  }
+
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <Card className={classes.common}>
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
-          <TextField className={classes.common} id="standard-basic" label="Taco Name" variant="outlined" placeholder="Type a Taco Name..." />
+          <Controller
+            as={<TextField />}
+            className={classes.common}
+            control={control}
+            rules={{required: true}}
+            label="Taco Name"
+            variant="outlined"
+            placeholder="Type a Taco Name..."
+            name="name"
+            defaultValue="" />
         </CardContent>
         <CardActions className={classes.actions}>
-          <Button size="small">Submit</Button>
-          <Button size="small">Cancel</Button>
+          <Button size="small" type="submit">Submit</Button>
+          <Button size="small" type="reset" onClick={() => reset()}>Cancel</Button>
         </CardActions>
       </form>
     </Card>
   );
+};
+
+TacosDetails.propTypes = {
+  taco: PropTypes.object
 }
