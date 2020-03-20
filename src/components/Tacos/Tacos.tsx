@@ -6,11 +6,11 @@ import { TacosList, TacosDetails } from '.';
 import { useApi } from '../../services';
 
 export const Tacos = () => {
-  // const [ ] = useApi('all');
+  const [ tacos, isLoading, error, retry ] = useApi('all');
 
   return (
     <Container fixed>
-      <TacosList />
+      <TacosList tacos={tacos ?? []} />
       <TacosDetails />
     </Container>
   );

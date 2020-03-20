@@ -17,10 +17,10 @@ const TacosService = {
 // useAPI hook
 // -----------------------
 
-export const useApi = (method: string | any, ...params: any[]) => {
-  const [ data, setData ] = useState(null);
-  const [ isLoading, setIsLoading ] = useState(false);
-  const [ error, setError ] = useState(null);
+export const useApi = (method: string, ...params: any[])  => {
+  const [ data, setData ] = useState<any[]>([]);
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const [ error, setError ] = useState<any>(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async () => {
