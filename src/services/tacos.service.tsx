@@ -7,9 +7,12 @@ const model = 'tacos';
 
 const TacosService = {
   all: async () => {
-    console.log('CA:')
-    const tacosResponse = await axios.get(`${BASE_URL}/${model}`);
-    return tacosResponse.data;
+    try {
+      const tacosResponse = await axios.get(`${BASE_URL}/${model}`);
+      return tacosResponse.data;
+    } catch (e) {
+      return e;
+    }
   }
 }
 
