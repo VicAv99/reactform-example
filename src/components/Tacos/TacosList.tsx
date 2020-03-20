@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Taco } from '.';
-import { List, ListItem, ListItemText, makeStyles, Theme, createStyles, Card } from '@material-ui/core';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+  Theme,
+  createStyles,
+  Card
+} from '@material-ui/core';
+import { Clear } from '@material-ui/icons';
 
 interface TacosListProps {
   tacos: Taco[];
@@ -28,6 +37,7 @@ export const TacosList = ({ tacos, selectTaco }: TacosListProps) => {
           tacos.map((taco: Taco, i: number) => (
             <ListItem key={i} button onClick={() => selectTaco(taco)}>
               <ListItemText primary={taco.id} secondary={taco.name} />
+              <Clear />
             </ListItem>
           ))
         }
